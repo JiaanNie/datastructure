@@ -18,7 +18,7 @@ public class SingleLinkedList<T> {
     this.size = 1;
   }
 
-  public void addElementLast(T data) {
+  public void addElementToTail(T data) {
     Node<T> node = new Node<T>(data);
 
     // check to see if this is the first node being added to the list
@@ -32,7 +32,7 @@ public class SingleLinkedList<T> {
 
   }
 
-  public void addElementFirst(T data) {
+  public void addElementToHead(T data) {
     Node<T> node = new Node<T>(data);
 
     // check to see if this is the first node being added to the list
@@ -64,10 +64,24 @@ public class SingleLinkedList<T> {
       throw new RuntimeException("empty list");
     }
     T data = this.tail.getData();
-    Node<T> temp = this.tail;
-    this.head.next = null;
-    this.size--;
 
+    if (this.size == 1) {
+      this.head = null;
+      this.tail = null;
+    }
+    else {
+
+      Node<T> temp = this.head.next;
+      Node<T> temp2 = this.head;
+      while (temp !=  null) {
+        temp = temp.next;
+        temp2 = temp2.next;
+      }
+      this.tail = temp2;
+      temp2.next = null;
+
+    }
+    this.size--;
     return data;
 
   }
