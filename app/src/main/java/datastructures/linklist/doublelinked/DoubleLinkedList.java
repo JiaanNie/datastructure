@@ -1,19 +1,19 @@
-package src.datastructures.linklist.singlelinked;
+package doublelinkedlist;
 
-import src.datastructures.linklist.Node;
+import linklist.node.Node;
 
-public class SingleLinkedList<T> {
+public class DoubleLinkedList<T> {
   private Node<T> head;
   private Node<T> tail;
   private int size;
 
-  public SingleLinkedList() {
+  public DoubleLinkedList() {
     this.head = null;
     this.tail = null;
     this.size = 0;
   }
 
-  public SingleLinkedList(T data) {
+  public DoubleLinkedList(T data) {
     this.head = this.tail = new Node<T>(data);
     this.size = 1;
   }
@@ -26,6 +26,7 @@ public class SingleLinkedList<T> {
       this.head = this.tail = node;
     } else {
       this.tail.next = node;
+      node.previous = this.tail;
       this.tail = node;
     }
     this.size += 1;
@@ -39,6 +40,7 @@ public class SingleLinkedList<T> {
     if (this.head == null && this.tail == null) {
       this.head = this.tail = node;
     } else {
+      this.head.previous = node;
       node.next = head;
       head = node;
 
@@ -55,7 +57,7 @@ public class SingleLinkedList<T> {
     Node<T> temp = this.head;
     this.head = this.head.next;
     temp.next = null;
-    this.size--;
+    this.head.previous = null;
     return data;
 
   }
@@ -65,23 +67,12 @@ public class SingleLinkedList<T> {
       throw new RuntimeException("empty list");
     }
     T data = this.tail.getData();
-
-    if (this.size == 1) {
-      this.head = null;
-      this.tail = null;
-    } else {
-
-      Node<T> temp = this.head.next;
-      Node<T> temp2 = this.head;
-      while (temp != null) {
-        temp = temp.next;
-        temp2 = temp2.next;
-      }
-      this.tail = temp2;
-      temp2.next = null;
-
-    }
+    Node<T> temp = this.tail;
+    this.tail = this.tail.previous;
+    temp.previous = null;
+    this.head.next = null;
     this.size--;
+
     return data;
 
   }
@@ -91,30 +82,30 @@ public class SingleLinkedList<T> {
       throw new IndexOutOfBoundsException();
     }
     T data = null;
-    if (index == 0) {
-      data = removeFirstElement();
+    Node<T> tempPointer = this.head;
+    for (int i = 0; i <= index; i++) {
+      if (i == index) {
+        data = tempPointer.getData();
+        Node<T> nextNode = tempPointer.next;
+        Node<T> previousNode = tempPointer.previous;
+        if (nextNode == null) {
+          previousNode.next = null;
+          tempPointer.previous = null;
+          this.tail = previousNode;
 
-    } else if (index == this.size - 1) {
-      data = removeLastElement();
-
-    } else {
-      // at this point the list has to have 3 or more nodes
-      Node<T> previousNode = this.head;
-      Node<T> currentNode = previousNode.next;
-      Node<T> nextNode = currentNode.next;
-
-      int i = 1;
-      while (i != index) {
-        previousNode = previousNode.next;
-        currentNode = currentNode.next;
-        nextNode = nextNode.next;
-        i++;
+        } else if (previousNode == null) {
+          nextNode.previous = null;
+          tempPointer.next = null;
+          this.head = nextNode;
+        } else if (previousNode != null && nextNode != null) {
+          previousNode.next = nextNode;
+          nextNode.previous = previousNode;
+        }
       }
-      data = currentNode.getData();
-      previousNode.next = nextNode;
-      this.size--;
-    }
+      tempPointer = tempPointer.next;
 
+    }
+    this.size--;
     return data;
 
   }
@@ -189,7 +180,7 @@ public class SingleLinkedList<T> {
         previous = Integer.toString(trav.previous.hashCode());
       }
 
-      String data = String.format("( %s %s %s data: %s)",
+      String data = String.format("( previous node: %s current node: %s next node: %s data: %s)",
           previous,
           trav.hashCode(),
           next,

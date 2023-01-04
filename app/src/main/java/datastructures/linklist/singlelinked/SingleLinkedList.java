@@ -1,24 +1,24 @@
-package src.datastructures.linklist.doublelinked;
+package singlelinkedlist;
 
-import src.datastructures.linklist.Node;
+import linklist.node.Node;
 
-public class DoubleLinkedList<T> {
+public class SingleLinkedList<T> {
   private Node<T> head;
   private Node<T> tail;
   private int size;
 
-  public DoubleLinkedList() {
+  public SingleLinkedList() {
     this.head = null;
     this.tail = null;
     this.size = 0;
   }
 
-  public DoubleLinkedList(T data) {
+  public SingleLinkedList(T data) {
     this.head = this.tail = new Node<T>(data);
     this.size = 1;
   }
 
-  public void addElementLast(T data) {
+  public void addElementToTail(T data) {
     Node<T> node = new Node<T>(data);
 
     // check to see if this is the first node being added to the list
@@ -26,21 +26,19 @@ public class DoubleLinkedList<T> {
       this.head = this.tail = node;
     } else {
       this.tail.next = node;
-      node.previous = this.tail;
       this.tail = node;
     }
     this.size += 1;
 
   }
 
-  public void addElementFirst(T data) {
+  public void addElementToHead(T data) {
     Node<T> node = new Node<T>(data);
 
     // check to see if this is the first node being added to the list
     if (this.head == null && this.tail == null) {
       this.head = this.tail = node;
     } else {
-      this.head.previous = node;
       node.next = head;
       head = node;
 
@@ -57,7 +55,7 @@ public class DoubleLinkedList<T> {
     Node<T> temp = this.head;
     this.head = this.head.next;
     temp.next = null;
-    this.head.previous = null;
+    this.size--;
     return data;
 
   }
@@ -67,12 +65,23 @@ public class DoubleLinkedList<T> {
       throw new RuntimeException("empty list");
     }
     T data = this.tail.getData();
-    Node<T> temp = this.tail;
-    this.tail = this.tail.previous;
-    temp.previous = null;
-    this.head.next = null;
-    this.size--;
 
+    if (this.size == 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+
+      Node<T> temp = this.head.next;
+      Node<T> temp2 = this.head;
+      while (temp != null) {
+        temp = temp.next;
+        temp2 = temp2.next;
+      }
+      this.tail = temp2;
+      temp2.next = null;
+
+    }
+    this.size--;
     return data;
 
   }
@@ -82,30 +91,30 @@ public class DoubleLinkedList<T> {
       throw new IndexOutOfBoundsException();
     }
     T data = null;
-    Node<T> tempPointer = this.head;
-    for (int i = 0; i <= index; i++) {
-      if (i == index) {
-        data = tempPointer.getData();
-        Node<T> nextNode = tempPointer.next;
-        Node<T> previousNode = tempPointer.previous;
-        if (nextNode == null) {
-          previousNode.next = null;
-          tempPointer.previous = null;
-          this.tail = previousNode;
+    if (index == 0) {
+      data = removeFirstElement();
 
-        } else if (previousNode == null) {
-          nextNode.previous = null;
-          tempPointer.next = null;
-          this.head = nextNode;
-        } else if (previousNode != null && nextNode != null) {
-          previousNode.next = nextNode;
-          nextNode.previous = previousNode;
-        }
+    } else if (index == this.size - 1) {
+      data = removeLastElement();
+
+    } else {
+      // at this point the list has to have 3 or more nodes
+      Node<T> previousNode = this.head;
+      Node<T> currentNode = previousNode.next;
+      Node<T> nextNode = currentNode.next;
+
+      int i = 1;
+      while (i != index) {
+        previousNode = previousNode.next;
+        currentNode = currentNode.next;
+        nextNode = nextNode.next;
+        i++;
       }
-      tempPointer = tempPointer.next;
-
+      data = currentNode.getData();
+      previousNode.next = nextNode;
+      this.size--;
     }
-    this.size--;
+
     return data;
 
   }
@@ -180,7 +189,7 @@ public class DoubleLinkedList<T> {
         previous = Integer.toString(trav.previous.hashCode());
       }
 
-      String data = String.format("( previous node: %s current node: %s next node: %s data: %s)",
+      String data = String.format("( %s %s %s data: %s)",
           previous,
           trav.hashCode(),
           next,
