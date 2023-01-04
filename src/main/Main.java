@@ -3,6 +3,7 @@ package src.main;
 // import java.util.Arrays;
 // import src.datastructures.dynamiclist.DynamicList;
 import src.datastructures.linklist.doublelinked.DoubleLinkedList;
+import src.datastructures.linklist.singlelinked.SingleLinkedList;
 
 class Main {
   public static void main(String[] args) {
@@ -39,6 +40,22 @@ class Main {
     linkedlist.addElementLast("efg");
 
     System.out.println(linkedlist.toString());
+
+    SingleLinkedList<String> ls = new SingleLinkedList<String>();
+    ls.addElementToTail("0");
+    ls.addElementToTail("1");
+    ls.addElementToTail("2");
+    ls.addElementToTail("3");
+    ls.addElementToTail("4");
+
+    System.out.println(ls.toString());
+    ls.removeElementAt(2);
+    System.out.println(ls.toString());
+    ls.removeElementAt(2);
+    ls.removeElementAt(2);
+    ls.removeElementAt(2);
+
+    System.out.println(ls.size());
 
   }
 
