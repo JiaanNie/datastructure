@@ -189,7 +189,7 @@ public class SingleLinkedList<T> {
         previous = Integer.toString(trav.previous.hashCode());
       }
 
-      String data = String.format("( previous node: %s current node: %s next node: %s data: %s)",
+      String data = String.format("( %s %s %s data: %s)",
           previous,
           trav.hashCode(),
           next,

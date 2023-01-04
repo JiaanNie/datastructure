@@ -48,10 +48,10 @@ class Main {
     // ls.addElementToTail("3");
     // ls.addElementToTail("4");
 
-    ls.removeElementAt(1);
-    ls.removeElementAt(0);
+    // ls.removeElementAt(1);
+    // ls.removeElementAt(0);
 
-    System.out.println(ls.size());
+    System.out.println(ls.toString());
 
   }
 
