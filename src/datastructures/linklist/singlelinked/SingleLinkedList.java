@@ -55,6 +55,7 @@ public class SingleLinkedList<T> {
     Node<T> temp = this.head;
     this.head = this.head.next;
     temp.next = null;
+    this.size--;
     return data;
 
   }
@@ -90,38 +91,30 @@ public class SingleLinkedList<T> {
       throw new IndexOutOfBoundsException();
     }
     T data = null;
-    if (this.size == 1) {
-      this.head = this.tail = null;
-      data = this.head.getData();
+    if (index == 0) {
+      data = removeFirstElement();
+
+    } else if (index == this.size - 1) {
+      data = removeLastElement();
 
     } else {
-      if (index == 0) {
-        data = removeFirstElement();
+      // at this point the list has to have 3 or more nodes
+      Node<T> previousNode = this.head;
+      Node<T> currentNode = previousNode.next;
+      Node<T> nextNode = currentNode.next;
 
-      } else if (index == this.size - 1) {
-        data = removeLastElement();
-
-      } else {
-        // at this point the last has to have 3 or more nodes
-        Node<T> previousNode = this.head;
-        Node<T> currentNode = previousNode.next;
-        Node<T> nextNode = currentNode.next;
-
-        int i = 1;
-        while (i != index) {
-          previousNode = previousNode.next;
-          currentNode = currentNode.next;
-          nextNode = nextNode.next;
-          i++;
-        }
-        data = currentNode.getData();
-        previousNode.next = nextNode;
-
+      int i = 1;
+      while (i != index) {
+        previousNode = previousNode.next;
+        currentNode = currentNode.next;
+        nextNode = nextNode.next;
+        i++;
       }
-
+      data = currentNode.getData();
+      previousNode.next = nextNode;
+      this.size--;
     }
 
-    this.size--;
     return data;
 
   }

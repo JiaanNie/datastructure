@@ -23,37 +23,33 @@ class Main {
     // System.out.println(mylist.length);
     // System.out.println(mylist.capacity);
 
-    DoubleLinkedList<String> linkedlist = new DoubleLinkedList<String>();
-    System.out.println(linkedlist.size());
-    linkedlist.addElementLast("abc");
-    System.out.println(linkedlist.peakFirstElement());
-    linkedlist.addElementLast("efg");
+    // DoubleLinkedList<String> linkedlist = new DoubleLinkedList<String>();
+    // System.out.println(linkedlist.size());
+    // linkedlist.addElementLast("abc");
+    // System.out.println(linkedlist.peakFirstElement());
+    // linkedlist.addElementLast("efg");
 
-    System.out.println(linkedlist.peakFirstElement());
-    System.out.println(linkedlist.peakLastElement());
-    ;
-    linkedlist.removeElementAt(0);
-    linkedlist.addElementLast("efg");
-    linkedlist.addElementLast("efg");
-    linkedlist.addElementLast("efg");
-    linkedlist.addElementLast("efg");
-    linkedlist.addElementLast("efg");
+    // System.out.println(linkedlist.peakFirstElement());
+    // System.out.println(linkedlist.peakLastElement());
+    // ;
+    // linkedlist.removeElementAt(0);
+    // linkedlist.addElementLast("efg");
+    // linkedlist.addElementLast("efg");
+    // linkedlist.addElementLast("efg");
+    // linkedlist.addElementLast("efg");
+    // linkedlist.addElementLast("efg");
 
-    System.out.println(linkedlist.toString());
+    // System.out.println(linkedlist.toString());
 
     SingleLinkedList<String> ls = new SingleLinkedList<String>();
     ls.addElementToTail("0");
     ls.addElementToTail("1");
-    ls.addElementToTail("2");
-    ls.addElementToTail("3");
-    ls.addElementToTail("4");
+    // ls.addElementToTail("2");
+    // ls.addElementToTail("3");
+    // ls.addElementToTail("4");
 
-    System.out.println(ls.toString());
-    ls.removeElementAt(2);
-    System.out.println(ls.toString());
-    ls.removeElementAt(2);
-    ls.removeElementAt(2);
-    ls.removeElementAt(2);
+    ls.removeElementAt(1);
+    ls.removeElementAt(0);
 
     System.out.println(ls.size());
 
