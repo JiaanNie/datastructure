@@ -3,11 +3,7 @@
  */
 package datastructures;
 
-import org.checkerframework.checker.units.qual.s;
-
 import datastructures.linklist.doublelinked.DoubleLinkedList;
-
-import datastructures.stack.Stack;
 
 import problmes.BracketsProblem;
 
