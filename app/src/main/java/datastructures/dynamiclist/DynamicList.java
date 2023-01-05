@@ -2,9 +2,9 @@ package datastructures.dynamiclist;
 
 @SuppressWarnings("unchecked")
 public class DynamicList<T> {
-  public T[] array;
-  public int length;
-  public int capacity;
+  private T[] array;
+  private int length;
+  private int capacity;
 
   public DynamicList() {
     this(2);
@@ -74,6 +74,10 @@ public class DynamicList<T> {
 
   public int size() {
     return this.length;
+  }
+
+  public int capacity() {
+    return this.capacity;
   }
 
   public boolean isEmpty() {

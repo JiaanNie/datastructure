@@ -156,6 +156,11 @@ public class DoubleLinkedList<T> {
     return indexOf(obj) != -1;
   }
 
+  public Node<T> getHead() {
+    Node<T> temp = this.head;
+    return temp;
+  }
+
   public int size() {
     return this.size;
   }
