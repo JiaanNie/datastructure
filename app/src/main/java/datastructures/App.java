@@ -3,14 +3,16 @@
  */
 package datastructures;
 
+import org.checkerframework.checker.units.qual.s;
+
 import datastructures.linklist.doublelinked.DoubleLinkedList;
 
 import datastructures.stack.Stack;
 
+import problmes.BracketsProblem;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
 
     public void createDoubleLinkedList() {
         DoubleLinkedList<String> list = new DoubleLinkedList<String>();
@@ -20,31 +22,10 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App instance = new App();
-        System.out.println(instance.getGreeting());
-        instance.createDoubleLinkedList();
-        Stack<Character> stack = new Stack<>();
-        String input = "[(((){}]";
-        String left = "[{(";
-        String correctBrackets = "[] {} ()";
-        boolean isVaild = true;
-
-        for (int i = 0; i < input.length(); i++) {
-            if (left.indexOf(input.charAt(i)) != -1) {
-                stack.push(input.charAt(i));
-            } else {
-                char c = stack.pop();
-                StringBuilder sb = new StringBuilder();
-                sb.append(c).append(input.charAt(i));
-                if (correctBrackets.contains(sb.toString()) == false) {
-                    isVaild = false;
-                }
-                // if (isVaild == false) {
-                //     break;
-                // }
-            }
-        }
-        System.out.println(isVaild);
+        String input = "[()]{}{[()()]()}";
+        BracketsProblem solver = new BracketsProblem();
+        boolean result = solver.solve(input);
+        System.out.println(result);
 
     }
 }
