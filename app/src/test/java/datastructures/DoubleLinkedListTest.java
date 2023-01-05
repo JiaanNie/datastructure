@@ -33,6 +33,8 @@ public class DoubleLinkedListTest {
 
     list.addElementToHead(4);
     list.addElementToHead(5);
+
+    // 5<->4<->3<->2<->1
     assertEquals(5, list.size());
 
     // remove first element
@@ -47,6 +49,14 @@ public class DoubleLinkedListTest {
     assertNull(list.getTail().next);
     assertEquals(3, list.getTail().previous.getData());
     assertEquals(2, list.getTail().getData());
+
+    // 4<->3<->2
+    assertEquals(2, list.getTail().getData());
+    assertEquals(4, list.getHead().getData());
+    assertEquals(3, list.getHead().next.getData());
+    assertEquals(3, list.getTail().previous.getData());
+    assertNull(list.getTail().next);
+    assertNull(list.getHead().previous);
 
     logger.info("passed");
 
