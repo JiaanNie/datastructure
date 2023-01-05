@@ -1,4 +1,4 @@
-package linklist.node;
+package datastructures.linklist;
 
 public class Node<T> {
   T data;

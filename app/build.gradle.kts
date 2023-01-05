@@ -31,5 +31,8 @@ application {
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    useJUnitPlatform();
+    this.testLogging {
+        this.showStandardStreams = true
+    }
 }

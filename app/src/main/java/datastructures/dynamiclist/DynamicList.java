@@ -1,4 +1,4 @@
-package dynamiclist;
+package datastructures.dynamiclist;
 
 @SuppressWarnings("unchecked")
 public class DynamicList<T> {

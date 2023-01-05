@@ -1,6 +1,6 @@
-package singlelinkedlist;
+package datastructures.linklist.singlelinked;
 
-import linklist.node.Node;
+import datastructures.linklist.Node;
 
 public class SingleLinkedList<T> {
   private Node<T> head;
