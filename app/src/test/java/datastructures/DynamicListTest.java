@@ -1,5 +1,8 @@
 package datastructures;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
@@ -11,9 +14,10 @@ class DynamicListTest {
 
   @Test
   void listCreation() {
-    datastructures.dynamiclist.DynamicList<String> list = new DynamicList<String>();
-    list.add("test");
-    list.add("abdc");
-    logger.info(Integer.toString(list.size()));
+    DynamicList<String> list = new DynamicList<String>();
+    list.add("1");
+    list.add("2");
+    assertEquals(2, list.size());
+    logger.info("passed");
   }
 }
