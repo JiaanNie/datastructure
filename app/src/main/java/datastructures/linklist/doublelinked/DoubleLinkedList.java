@@ -58,6 +58,7 @@ public class DoubleLinkedList<T> {
     this.head = this.head.next;
     temp.next = null;
     this.head.previous = null;
+    this.size--;
     return data;
 
   }
@@ -70,7 +71,7 @@ public class DoubleLinkedList<T> {
     Node<T> temp = this.tail;
     this.tail = this.tail.previous;
     temp.previous = null;
-    this.head.next = null;
+    this.tail.next = null;
     this.size--;
 
     return data;
