@@ -161,6 +161,11 @@ public class DoubleLinkedList<T> {
     return temp;
   }
 
+  public Node<T> getTail() {
+    Node<T> temp = this.tail;
+    return temp;
+  }
+
   public int size() {
     return this.size;
   }
