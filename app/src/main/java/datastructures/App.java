@@ -5,6 +5,8 @@ package datastructures;
 
 import datastructures.linklist.doublelinked.DoubleLinkedList;
 
+import datastructures.stack.Stack;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -21,5 +23,28 @@ public class App {
         App instance = new App();
         System.out.println(instance.getGreeting());
         instance.createDoubleLinkedList();
+        Stack<Character> stack = new Stack<>();
+        String input = "[(((){}]";
+        String left = "[{(";
+        String correctBrackets = "[] {} ()";
+        boolean isVaild = true;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (left.indexOf(input.charAt(i)) != -1) {
+                stack.push(input.charAt(i));
+            } else {
+                char c = stack.pop();
+                StringBuilder sb = new StringBuilder();
+                sb.append(c).append(input.charAt(i));
+                if (correctBrackets.contains(sb.toString()) == false) {
+                    isVaild = false;
+                }
+                // if (isVaild == false) {
+                //     break;
+                // }
+            }
+        }
+        System.out.println(isVaild);
+
     }
 }
