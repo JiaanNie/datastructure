@@ -3,8 +3,6 @@
  */
 package datastructures;
 
-import org.checkerframework.checker.interning.qual.CompareToMethod;
-
 import datastructures.linklist.doublelinked.DoubleLinkedList;
 
 import problmes.BracketsProblem;
@@ -58,9 +56,8 @@ public class App {
         System.out.println(obj1.getStuff());
         System.out.println(obj1.compareTo(obj2));
 
-
-        Node<test> n1 =  new Node<test>(obj1);
-        Node<test> n2 =  new Node<test>(obj2);
+        Node<test> n1 = new Node<test>(obj1);
+        Node<test> n2 = new Node<test>(obj2);
 
         System.out.println(n1.compareTo(n2));
 

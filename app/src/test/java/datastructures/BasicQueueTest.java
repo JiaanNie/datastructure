@@ -1,6 +1,7 @@
 package datastructures;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.logging.Logger;
 
@@ -34,6 +35,19 @@ public class BasicQueueTest {
       expectedSize--;
     }
 
+    assertThrows(RuntimeException.class, () -> {
+      queue.dequeue();
+    });
+
+    // try {
+    // Integer data = queue.dequeue()
+
+    // }
+    // catch(RuntimeException e) {
+    // assertEquals("empty list", e.getMessage());
+    // throw e;
+    // }
+    // fail("fail to catch runtime execption");
     logger.info("passed");
 
   }
