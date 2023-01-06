@@ -27,6 +27,9 @@ class DynamicListTest {
     assertEquals(4, list.capacity());
     assertEquals(1, list.getElementAt(0));
     assertEquals(2, list.getElementAt(1));
+    assertEquals(true, list.contains(2));
+    assertEquals(1, list.indexOf(2));
+
     logger.info("passed");
   }
 

@@ -66,6 +66,24 @@ public class DynamicList<T> {
       this.array = arr;
     }
     return data;
+
+  }
+
+  public int indexOf(T element) {
+    for (int i = 0; i < this.length; i++) {
+      if (element == null) {
+        if (this.array[i] == null)
+          return i;
+      } else {
+        if (element.equals(this.array[i]))
+          return i;
+      }
+    }
+    return -1;
+  }
+
+  public boolean contains(T element) {
+    return indexOf(element) != -1;
   }
 
   public T getElementAt(int index) {

@@ -20,15 +20,15 @@ public class BasicQueueTest {
     assertEquals(0, queue.size());
     assertEquals(true, queue.isEmpty());
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1_000_000; i++) {
       queue.enqueue(i);
     }
 
-    assertEquals(10, queue.size());
+    assertEquals(1_000_000, queue.size());
     assertEquals(0, queue.peekFirstElement());
-    assertEquals(9, queue.peekLastElement());
+    assertEquals(999_999, queue.peekLastElement());
     int expectedSize = queue.size() - 1;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1_000_000; i++) {
       Integer data = queue.dequeue();
       assertEquals(expectedSize, queue.size());
       assertEquals(i, data);
@@ -38,16 +38,6 @@ public class BasicQueueTest {
     assertThrows(RuntimeException.class, () -> {
       queue.dequeue();
     });
-
-    // try {
-    // Integer data = queue.dequeue()
-
-    // }
-    // catch(RuntimeException e) {
-    // assertEquals("empty list", e.getMessage());
-    // throw e;
-    // }
-    // fail("fail to catch runtime execption");
     logger.info("passed");
 
   }
