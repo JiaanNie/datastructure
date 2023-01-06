@@ -1,5 +1,6 @@
 package datastructures.trees.binarayheap;
 
-public class BinarayHeap {
+public class BinarayHeap <T extends Comparable<T>>{
+  
   
 }
