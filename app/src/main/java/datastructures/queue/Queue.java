@@ -36,4 +36,12 @@ public class Queue<T> {
     return this.size == 0;
   }
 
+  public T peekFirstElement() {
+    return queue.peakFirstElement();
+  }
+
+  public T peekLastElement() {
+    return queue.peakLastElement();
+  }
+
 }
