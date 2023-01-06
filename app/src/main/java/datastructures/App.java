@@ -3,12 +3,14 @@
  */
 package datastructures;
 
+import org.checkerframework.checker.interning.qual.CompareToMethod;
+
 import datastructures.linklist.doublelinked.DoubleLinkedList;
 
 import problmes.BracketsProblem;
+import datastructures.trees.node.Node;
 
 public class App {
-
 
     public void createDoubleLinkedList() {
         DoubleLinkedList<String> list = new DoubleLinkedList<String>();
@@ -17,11 +19,50 @@ public class App {
         System.out.println(list.toString());
     }
 
+    static public class test implements Comparable<test> {
+        int prioity;
+        String stuff;
+
+        public test(int value, String stuff) {
+            this.prioity = value;
+            this.stuff = stuff;
+        }
+
+        @Override
+        public int compareTo(test o) {
+            int result;
+            if (this.prioity > o.prioity) {
+                result = 1;
+            } else if (this.prioity < o.prioity) {
+                result = -1;
+            } else {
+                result = 0;
+            }
+            return result;
+
+        }
+
+        public String getStuff() {
+            return this.stuff;
+        }
+
+    }
+
     public static void main(String[] args) {
         String input = "[()]{}{[()()]()}";
         BracketsProblem solver = new BracketsProblem();
         boolean result = solver.solve(input);
         System.out.println(result);
+        test obj2 = new test(2, "afdsf");
+        test obj1 = new test(3, "afdsf");
+        System.out.println(obj1.getStuff());
+        System.out.println(obj1.compareTo(obj2));
+
+
+        Node<test> n1 =  new Node<test>(obj1);
+        Node<test> n2 =  new Node<test>(obj2);
+
+        System.out.println(n1.compareTo(n2));
 
     }
 }

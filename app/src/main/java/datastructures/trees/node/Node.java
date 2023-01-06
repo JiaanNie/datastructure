@@ -11,11 +11,21 @@ public class Node<T extends Comparable<T>> {
     this.data = data;
   }
 
+  public Node(T data, Node<T> leftChild, Node<T> rightChild) {
+    this.leftChild = leftChild;
+    this.rightChild = rightChild;
+    this.data = data;
+  }
+
   public T getData() {
     return this.data;
   }
-  
+
   public void setData(T data) {
     this.data = data;
+  }
+
+  public int compareTo(Node<T> o) {
+    return this.data.compareTo(o.getData());
   }
 }
