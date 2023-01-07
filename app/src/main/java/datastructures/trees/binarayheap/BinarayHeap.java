@@ -32,6 +32,8 @@ public class BinarayHeap<T extends Comparable<T>> {
 
   }
 
+  
+
   public void insertElement(Node<T> node) {
     if (this.root == null) {
       this.root = node;
