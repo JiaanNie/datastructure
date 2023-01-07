@@ -43,10 +43,6 @@ public class BinarayHeap<T extends Comparable<T>> {
       while (currentNodePointer != null) {
         currentNodePointer = currentNodePointer.leftChild;
 
-
-
-
-
       }
 
       
