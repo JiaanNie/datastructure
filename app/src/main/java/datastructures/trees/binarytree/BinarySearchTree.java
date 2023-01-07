@@ -75,18 +75,33 @@ public class BinarySearchTree<T extends Comparable<T>> {
     Queue<Node<T>> queue = new Queue<Node<T>>();
     DynamicList<Node<T>> vistedElements = new DynamicList<Node<T>>();
     Node<T> currentNodePointer = this.root;
-    queue.enqueue(currentNodePointer);
-
+    Node<T> parentNodePointer = this.root;
     while (vistedElements.size() != this.size) {
-      if (currentNodePointer.leftChild != null) {
-        queue.enqueue(currentNodePointer.leftChild);
-      } else if (currentNodePointer.rightChild != null) {
-        queue.enqueue(currentNodePointer.rightChild);
-      } else {
 
-        currentNodePointer = queue.dequeue();
-        vistedElements.add(currentNodePointer);
+      if (vistedElements.contains(currentNodePointer) == false) {
+        queue.enqueue(new Node<T>(currentNodePointer.getData()));
       }
+      // add the current node childrens to the queue
+      if (currentNodePointer.leftChild != null) {
+        queue.enqueue(new Node<T>(currentNodePointer.leftChild.getData()));
+      }
+      if (currentNodePointer.rightChild != null) {
+        queue.enqueue(new Node<T>(currentNodePointer.rightChild.getData()));
+      }
+
+      // pop the head element from the queue  and check to see if we visted 
+      // added to the list if the element is not visited yet and mark it as visted
+      Node<T> node = queue.dequeue();
+      if (node.compareTo(currentNodePointer) == 0){
+        vistedElements.add(node);
+      }
+      
+
+
+      currentNodePointer = currentNodePointer.leftChild;
+
+      currentNodePointer= currentNodePointer.rightChild;
+
     }
     return vistedElements;
   }

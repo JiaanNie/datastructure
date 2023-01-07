@@ -25,10 +25,12 @@ public class BinaryTreeTest {
     data[6] = 14;
     data[7] = 11;
     tree.buildTree(data);
-    // elements = tree.breadthFirstSearch();
+
+    // lmao the search is a infiniate loop fix it tomorrow
+    elements = tree.breadthFirstSearch();
 
     // for (int i = 0; i < elements.size(); i++) {
-    //   System.out.println(elements.getElementAt(i).getData());
+    // System.out.println(elements.getElementAt(i).getData());
     // }
     logger.info("passed");
 
