@@ -28,11 +28,11 @@ public class BinaryTreeTest {
 
     // lmao the search is a infiniate loop fix it tomorrow
     elements = tree.breadthFirstSearch();
-
-    // for (int i = 0; i < elements.size(); i++) {
-    // System.out.println(elements.getElementAt(i).getData());
-    // }
-    logger.info("passed");
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < elements.size(); i++) {
+      sb.append(Integer.toString(elements.getElementAt(i).getData()) + ",");
+    }
+    logger.info(sb.toString());
 
   }
 
