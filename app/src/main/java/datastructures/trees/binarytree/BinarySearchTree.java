@@ -67,8 +67,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
   public T removeNode(T target) {
     T removedData = null;
-    Node<T> parentNodePointer this.root;
+    Node<T> parentNodePointer = this.root;
+    Node<T> currentNodePointer = this.root;
     Node<T> targetNode = this.root;
+    boolean targetFound = false;
+    // find the target node and it parent node
+
+    // create a new node that contain the target data
+    Node<T> node = new Node<T>(target);
 
     // case 1 removing a leaf node
     if (targetNode.leftChild == null && targetNode.rightChild == null) {
@@ -77,13 +83,15 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     // case 2 the target node contain left subtree
     else if (targetNode.leftChild != null && targetNode.rightChild == null) {
+      // temp pointer pointing to the remaining left sub tree
+      Node<T> tempPointer = targetNode.leftChild;
 
     }
     // case 3 the target node contain right subtree
-    else if (targetNode.leftChild == null && targetNode.rightChild != null){
+    else if (targetNode.leftChild == null && targetNode.rightChild != null) {
 
     }
-    
+
     // case 4 target node contain both left and right subtree
     else {
 
@@ -95,6 +103,38 @@ public class BinarySearchTree<T extends Comparable<T>> {
     for (int i = 0; i < datas.length; i++) {
       addNode(datas[i]);
     }
+  }
+
+  private Node<T> findTargetNodeParent(Node<T> node) {
+    Node<T> parentOfTheTargetNode = this.root;
+    Node<T> targetNode = this.root;
+    Node<T> currentNodePointer = this.root;
+    boolean targetFound = false;
+    while (targetFound == false || targetNode != null) {
+
+      if (currentNodePointer.compareTo(node) == 0) {
+        // data find
+        targetNode = currentNodePointer;
+        targetFound = true;
+      } else if (currentNodePointer.compareTo(node) == 1) {
+        // go to the left subtree
+        if (currentNodePointer.leftChild == null) {
+          targetNode = null;
+        }
+
+        currentNodePointer = currentNodePointer.leftChild;
+
+      } else if (currentNodePointer.compareTo(node) == -1) {
+        // go to the right subtree
+        if (currentNodePointer.rightChild == null) {
+          targetNode = null;
+        }
+        currentNodePointer = currentNodePointer.rightChild;
+      }
+
+    }
+    return parentOfTheTargetNode;
+
   }
 
   public DynamicList<Node<T>> breadthFirstSearch() {
