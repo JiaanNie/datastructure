@@ -70,16 +70,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
   public T removeNode(T target) {
     T removedData = null;
-    Node<T> targetNode = this.root;
     // find the target node and it parent node
-    Node<T> parentOfTargetNode = findTargetNodeParent(new Node<T>(target));
-
-    if (parentOfTargetNode == null) {
-      // the target you looking for does not exist in the tree
-      return null;
-    }
-
-    // create a new node that contain the target data
+    Node<T>[] nodes = findTargetNodeParent(new Node<T>(target));
+    Node<T> parentNode = nodes[0];
+    Node<T> targetNode = nodes[1];
 
     // case 1 removing a leaf node
     if (targetNode.leftChild == null && targetNode.rightChild == null) {
@@ -89,12 +83,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
     // case 2 the target node contain left subtree
     else if (targetNode.leftChild != null && targetNode.rightChild == null) {
       // temp pointer pointing to the remaining left sub tree
-      Node<T> tempPointer = targetNode.leftChild;
+      removeNodeHelper(parentNode, targetNode, targetNode.leftChild);
 
     }
     // case 3 the target node contain right subtree
     else if (targetNode.leftChild == null && targetNode.rightChild != null) {
-
+      removeNodeHelper(parentNode, targetNode, targetNode.rightChild);
     }
 
     // case 4 target node contain both left and right subtree
@@ -108,6 +102,17 @@ public class BinarySearchTree<T extends Comparable<T>> {
     for (int i = 0; i < datas.length; i++) {
       addNode(datas[i]);
     }
+  }
+
+  private void removeNodeHelper(Node<T> parentNode, Node<T> targetNode, Node<T> subTree) {
+    Node<T> tempPointer = subTree;
+    if (parentNode.leftChild.compareTo(targetNode) == 0) {
+      parentNode.leftChild = tempPointer;
+    } else {
+      parentNode.rightChild = tempPointer;
+
+    }
+
   }
 
   @SuppressWarnings("unchecked")
