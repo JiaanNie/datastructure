@@ -65,6 +65,32 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
   }
 
+  public T removeNode(T target) {
+    T removedData = null;
+    Node<T> parentNodePointer this.root;
+    Node<T> targetNode = this.root;
+
+    // case 1 removing a leaf node
+    if (targetNode.leftChild == null && targetNode.rightChild == null) {
+      targetNode = null;
+    }
+
+    // case 2 the target node contain left subtree
+    else if (targetNode.leftChild != null && targetNode.rightChild == null) {
+
+    }
+    // case 3 the target node contain right subtree
+    else if (targetNode.leftChild == null && targetNode.rightChild != null){
+
+    }
+    
+    // case 4 target node contain both left and right subtree
+    else {
+
+    }
+    return removedData;
+  }
+
   public void buildTree(T[] datas) {
     for (int i = 0; i < datas.length; i++) {
       addNode(datas[i]);
