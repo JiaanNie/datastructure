@@ -2,6 +2,9 @@ package datastructures.trees.binarytree;
 
 import datastructures.trees.node.Node;
 import datastructures.queue.Queue;
+
+import java.lang.reflect.Array;
+
 import datastructures.dynamiclist.DynamicList;
 
 // element that is smaller then it parent it will insert to the left
@@ -67,14 +70,16 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
   public T removeNode(T target) {
     T removedData = null;
-    Node<T> parentNodePointer = this.root;
-    Node<T> currentNodePointer = this.root;
     Node<T> targetNode = this.root;
-    boolean targetFound = false;
     // find the target node and it parent node
+    Node<T> parentOfTargetNode = findTargetNodeParent(new Node<T>(target));
+
+    if (parentOfTargetNode == null) {
+      // the target you looking for does not exist in the tree
+      return null;
+    }
 
     // create a new node that contain the target data
-    Node<T> node = new Node<T>(target);
 
     // case 1 removing a leaf node
     if (targetNode.leftChild == null && targetNode.rightChild == null) {
@@ -105,25 +110,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
   }
 
-  public Node<T> findTargetNodeParent(Node<T> node) {
+  @SuppressWarnings("unchecked")
+  public Node<T>[] findTargetNodeParent(Node<T> node) {
     Node<T> targetNode = this.root;
     Node<T> currentNodePointer = this.root;
     Node<T> parentNodePointer = this.root;
+    Node<T>[] results = (Node<T>[]) Array.newInstance(Node.class, 2);
     boolean targetFound = false;
 
     // check if the root node is the one we are looking for
-    if (this.root.compareTo(node) == 0) {
-      targetFound = true;
-      return currentNodePointer;
-    }
-
     while (targetFound == false && targetNode != null) {
 
       if (currentNodePointer.compareTo(node) == 0) {
         // data find
         targetNode = currentNodePointer;
         targetFound = true;
-      } else if (node.compareTo(currentNodePointer)  == -1) {
+      } else if (node.compareTo(currentNodePointer) == -1) {
         // go to the left subtree node < currentNode
         if (currentNodePointer.leftChild == null) {
           targetNode = null;
@@ -131,7 +133,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         parentNodePointer = currentNodePointer;
         currentNodePointer = currentNodePointer.leftChild;
 
-      } else if (node.compareTo(currentNodePointer) == 1 ) {
+      } else if (node.compareTo(currentNodePointer) == 1) {
         // go to the right subtree
         if (currentNodePointer.rightChild == null) {
           targetNode = null;
@@ -139,9 +141,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
         parentNodePointer = currentNodePointer;
         currentNodePointer = currentNodePointer.rightChild;
       }
-
     }
-    return parentNodePointer;
+    if (targetNode == null) {
+      parentNodePointer = null;
+    }
+    results[0] = parentNodePointer;
+    results[1] = targetNode;
+
+    return results;
 
   }
 

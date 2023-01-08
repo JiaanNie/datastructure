@@ -34,8 +34,13 @@ public class BinaryTreeTest {
     }
     logger.info(sb.toString());
     Node<Integer> target = new Node<Integer>(14);
-    Node<Integer> result = tree.findTargetNodeParent(target);
-    logger.info(result.getData().toString());
+    Node<Integer>[] results = tree.findTargetNodeParent(target);
+    if (results[0] == null) {
+      logger.info("null");
+    } else {
+      logger.info(results[0].getData().toString());
+      logger.info(results[1].getData().toString());
+    }
 
   }
 
