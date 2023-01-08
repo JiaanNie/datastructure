@@ -105,35 +105,43 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
   }
 
-  private Node<T> findTargetNodeParent(Node<T> node) {
-    Node<T> parentOfTheTargetNode = this.root;
+  public Node<T> findTargetNodeParent(Node<T> node) {
     Node<T> targetNode = this.root;
     Node<T> currentNodePointer = this.root;
+    Node<T> parentNodePointer = this.root;
     boolean targetFound = false;
-    while (targetFound == false || targetNode != null) {
+
+    // check if the root node is the one we are looking for
+    if (this.root.compareTo(node) == 0) {
+      targetFound = true;
+      return currentNodePointer;
+    }
+
+    while (targetFound == false && targetNode != null) {
 
       if (currentNodePointer.compareTo(node) == 0) {
         // data find
         targetNode = currentNodePointer;
         targetFound = true;
-      } else if (currentNodePointer.compareTo(node) == 1) {
-        // go to the left subtree
+      } else if (node.compareTo(currentNodePointer)  == -1) {
+        // go to the left subtree node < currentNode
         if (currentNodePointer.leftChild == null) {
           targetNode = null;
         }
-
+        parentNodePointer = currentNodePointer;
         currentNodePointer = currentNodePointer.leftChild;
 
-      } else if (currentNodePointer.compareTo(node) == -1) {
+      } else if (node.compareTo(currentNodePointer) == 1 ) {
         // go to the right subtree
         if (currentNodePointer.rightChild == null) {
           targetNode = null;
         }
+        parentNodePointer = currentNodePointer;
         currentNodePointer = currentNodePointer.rightChild;
       }
 
     }
-    return parentOfTheTargetNode;
+    return parentNodePointer;
 
   }
 
