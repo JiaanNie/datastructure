@@ -74,27 +74,34 @@ public class BinarySearchTree<T extends Comparable<T>> {
     Node<T>[] nodes = findTargetNodeParent(new Node<T>(target));
     Node<T> parentNode = nodes[0];
     Node<T> targetNode = nodes[1];
+    if (targetNode == null) {
+      throw new NullPointerException("target does not exist in the tree");
+    }
 
     // case 1 removing a leaf node
     if (targetNode.leftChild == null && targetNode.rightChild == null) {
-      targetNode = null;
+      removeNodeHelper(parentNode, targetNode, null);
+      this.size--;
     }
 
     // case 2 the target node contain left subtree
     else if (targetNode.leftChild != null && targetNode.rightChild == null) {
       // temp pointer pointing to the remaining left sub tree
       removeNodeHelper(parentNode, targetNode, targetNode.leftChild);
+      this.size--;
 
     }
     // case 3 the target node contain right subtree
     else if (targetNode.leftChild == null && targetNode.rightChild != null) {
       removeNodeHelper(parentNode, targetNode, targetNode.rightChild);
+      this.size--;
     }
 
     // case 4 target node contain both left and right subtree
     else {
 
     }
+    removedData = targetNode.getData();
     return removedData;
   }
 
@@ -105,12 +112,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
   }
 
   private void removeNodeHelper(Node<T> parentNode, Node<T> targetNode, Node<T> subTree) {
-    Node<T> tempPointer = subTree;
-    if (parentNode.leftChild.compareTo(targetNode) == 0) {
-      parentNode.leftChild = tempPointer;
+    if (parentNode.compareTo(targetNode) == 0) {
+      this.root = null;
+    } else if (parentNode.compareTo(targetNode) == 1) {
+      // parentNode > targetNode the target node is in the left side
+      parentNode.leftChild = subTree;
     } else {
-      parentNode.rightChild = tempPointer;
-
+      // parentNode < targetNode the target node is in the right side
+      parentNode.rightChild = subTree;
     }
 
   }
