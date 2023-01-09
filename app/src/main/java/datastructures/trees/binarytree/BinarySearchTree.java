@@ -24,6 +24,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
     this.size = 1;
   }
 
+  public Node<T> getRoot() {
+    return this.root;
+  }
+
   public void addNode(T data) {
     // create a new node and ready to added to the tree
     Node<T> newNode = new Node<T>(data);
@@ -67,6 +71,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
   }
+
   // TODO refactor this later please
   public T removeNode(T target) {
     T removedData = null;
@@ -232,6 +237,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
       }
     }
     return vistedElements;
+  }
+
+  public void depthFirstSearch(Node<T> node) {
+    if (node == null) {
+      return;
+    }
+    depthFirstSearch(node.leftChild);
+    System.out.println(node.getData());
+    depthFirstSearch(node.rightChild);
+  }
+
+  public void postOrder(Node<T> node) {
+    if (node == null) {
+      return;
+    }
+    depthFirstSearch(node.leftChild);
+    depthFirstSearch(node.rightChild);
+    System.out.println(node.getData());
   }
 
 }

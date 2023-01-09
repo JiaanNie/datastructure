@@ -7,6 +7,8 @@ import datastructures.linklist.doublelinked.DoubleLinkedList;
 
 import problmes.BracketsProblem;
 import datastructures.trees.node.Node;
+import datastructures.trees.binarytree.BinarySearchTree;
+import datastructures.dynamiclist.DynamicList;
 
 public class App {
 
@@ -47,19 +49,33 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String input = "[()]{}{[()()]()}";
-        BracketsProblem solver = new BracketsProblem();
-        boolean result = solver.solve(input);
-        System.out.println(result);
-        test obj2 = new test(2, "afdsf");
-        test obj1 = new test(3, "afdsf");
-        System.out.println(obj1.getStuff());
-        System.out.println(obj1.compareTo(obj2));
+        // String input = "[()]{}{[()()]()}";
+        // BracketsProblem solver = new BracketsProblem();
+        // boolean result = solver.solve(input);
+        // System.out.println(result);
+        // test obj2 = new test(2, "afdsf");
+        // test obj1 = new test(3, "afdsf");
+        // System.out.println(obj1.getStuff());
+        // System.out.println(obj1.compareTo(obj2));
 
-        Node<test> n1 = new Node<test>(obj1);
-        Node<test> n2 = new Node<test>(obj2);
+        // Node<test> n1 = new Node<test>(obj1);
+        // Node<test> n2 = new Node<test>(obj2);
 
-        System.out.println(n1.compareTo(n2));
+        // System.out.println(n1.compareTo(n2));
+
+        BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
+        Integer[] data = new Integer[8];
+        data[0] = 15;
+        data[1] = 20;
+        data[2] = 12;
+        data[3] = 30;
+        data[4] = 56;
+        data[5] = 8;
+        data[6] = 14;
+        data[7] = 11;
+        tree.buildTree(data);
+        // tree.depthFirstSearch(tree.getRoot());
+        tree.postOrder(tree.getRoot());
 
     }
 }
