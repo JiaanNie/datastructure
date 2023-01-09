@@ -99,6 +99,35 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     // case 4 target node contain both left and right subtree
     else {
+      // the successor can be largest value in the left subtree
+      // keep travel to the right child untill you reach null
+      // the smallest vzalue in the right substree
+      // keep travel to the left child untill you reach null
+      Node<T>[] successors = findSuccessor(targetNode.leftChild);
+      Node<T> successorParentNode = successors[0];
+      Node<T> largestNode = successors[1];
+      targetNode.setData(largestNode.getData());
+      parentNode = successorParentNode;
+      targetNode = largestNode;
+      // swap the content of the two two successor and target node
+      // case 1 removing a leaf node
+      if (targetNode.leftChild == null && targetNode.rightChild == null) {
+        removeNodeHelper(parentNode, targetNode, null);
+        this.size--;
+      }
+
+      // case 2 the target node contain left subtree
+      else if (targetNode.leftChild != null && targetNode.rightChild == null) {
+        // temp pointer pointing to the remaining left sub tree
+        removeNodeHelper(parentNode, targetNode, targetNode.leftChild);
+        this.size--;
+
+      }
+      // case 3 the target node contain right subtree
+      else if (targetNode.leftChild == null && targetNode.rightChild != null) {
+        removeNodeHelper(parentNode, targetNode, targetNode.rightChild);
+        this.size--;
+      }
 
     }
     removedData = targetNode.getData();
@@ -109,6 +138,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
     for (int i = 0; i < datas.length; i++) {
       addNode(datas[i]);
     }
+  }
+
+  @SuppressWarnings("unchecked")
+  private Node<T>[] findSuccessor(Node<T> leftSubtree) {
+    Node<T>[] results = (Node<T>[]) Array.newInstance(Node.class, 2);
+    Node<T> largestNode = leftSubtree;
+    Node<T> parentNode = leftSubtree;
+    while (largestNode.rightChild != null) {
+      parentNode = largestNode;
+      largestNode = largestNode.rightChild;
+    }
+    results[0] = parentNode;
+    results[1] = largestNode;
+
+    return results;
+
   }
 
   private void removeNodeHelper(Node<T> parentNode, Node<T> targetNode, Node<T> subTree) {
