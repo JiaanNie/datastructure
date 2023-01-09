@@ -67,7 +67,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
   }
-
+  // TODO refactor this later please
   public T removeNode(T target) {
     T removedData = null;
     // find the target node and it parent node

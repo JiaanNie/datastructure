@@ -41,10 +41,9 @@ public class BinaryTreeTest {
       logger.info(results[0].getData().toString());
       logger.info(results[1].getData().toString());
     }
-    Integer data2 =tree.removeNode(12);
+    Integer data2 = tree.removeNode(12);
+    Integer data3 = tree.removeNode(15);
     logger.info(data2.toString());
-
-
 
   }
 
